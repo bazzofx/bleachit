@@ -50,7 +50,7 @@ Zero
 You can install by making the scrape file executable and moving it to your /bin/usr/scrape
 
 ```
-chmod +x scrape
-cp scrape /usr/bin/scrape
+chmod +x scrapex
+cp scrape /usr/bin/scrapex
 ```
 
