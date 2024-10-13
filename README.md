@@ -21,7 +21,7 @@ Zero
 One
 Two
 Zero
- zero
+ Zero
      One
 
 ▶ cat file2.txt
