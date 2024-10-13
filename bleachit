@@ -1,0 +1,41 @@
+#!/usr/bin/zsh
+#Function will read text files and removes empty lines, trim whitepaces and combine lines to unique values
+#Version 1.1
+#Added to also receive input from STDIN
+bleachit() {
+    # Create an array to hold all lines
+    local all_lines=()
+
+    if [[ -t 0 ]]; then
+        # If arguments are provided, process them as files
+        for input in "$@"; do
+            # Check if the file exists
+            if [[ -f "$input" ]]; then
+                # Read the lines, trim whitespace, and append to the array
+                while IFS= read -r line; do
+                    trimmed_line=$(echo "$line" | sed 's/^[ \t]*//;s/[ \t]*$//')
+                    # Only add non-empty lines to the array
+                    if [[ -n "$trimmed_line" ]]; then
+                        all_lines+=("$trimmed_line")
+                    fi
+                done < "$input"
+            else
+                echo "File not found: $input" >&2  # Print error message to stderr
+            fi
+        done
+    else
+        # If no arguments are provided, process stdin
+        while IFS= read -r line; do
+            trimmed_line=$(echo "$line" | sed 's/^[ \t]*//;s/[ \t]*$//')
+            # Only add non-empty lines to the array
+            if [[ -n "$trimmed_line" ]]; then
+                all_lines+=("$trimmed_line")
+            fi
+        done
+    fi
+
+    # Output unique sorted lines
+    printf "%s\n" "${all_lines[@]}" | sort -u
+}
+
+bleachit "$@"
