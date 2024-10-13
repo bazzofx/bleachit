@@ -20,6 +20,9 @@ however, I noticed his anew tool was not removing the words that had a space bef
 Zero
 One
 Two
+Zero
+ zero
+     One
 
 ▶ cat file2.txt
 One
